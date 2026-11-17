@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import{selectEvents,stats,csv,visibleTrack}from '../core.mjs';
+const report=JSON.parse(fs.readFileSync(new URL('../report.json',import.meta.url)));
+test('browser totals match Python summary',()=>{const s=stats(report.events);assert.equal(s.episodes,report.summary.episodes);assert.equal(s.vessels,report.summary.vessels);assert.ok(Math.abs(s.hours-report.summary.observed_hours)<1e-8);assert.equal(s.median,report.summary.median_minutes);});
+test('class/status filters partition the complete ledger',()=>{let total=0;for(const k of['cargo','tanker'])for(const s of['reported_moored','reported_anchor','other_stationary'])total+=selectEvents(report,k,s).length;assert.equal(total,report.events.length);});
+test('CSV row count and duration match selected events',()=>{const e=selectEvents(report,'cargo','reported_moored'),rows=csv(e).trim().split('\n');assert.equal(rows.length,e.length+1);if(e.length)assert.equal(Number(rows[1].split(',')[6]),e[0].minutes);});
+test('track replay never reveals a future position',()=>{for(const t of report.tracks){const clock=t.first,shown=visibleTrack(t,clock);assert.ok(shown.every(p=>p.time<=clock));assert.equal(shown.length,1);}});

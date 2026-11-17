@@ -1,0 +1,38 @@
+{
+  "source": {
+    "url": "https://noaaocm.blob.core.windows.net/ais/csv2/csv2024/ais-2024-01-01.csv.zst",
+    "sha256": "04e80b2f2896f51a7623e098eb48503b95786c9badf06550ce9e7d418654cb2d",
+    "bytes": 196492824,
+    "retrieved": "2026-11-17",
+    "hash_note": "Locally computed integrity pin; no publisher checksum supplied."
+  },
+  "schema": [
+    "mmsi",
+    "base_date_time",
+    "longitude",
+    "latitude",
+    "sog",
+    "cog",
+    "heading",
+    "vessel_name",
+    "imo",
+    "call_sign",
+    "vessel_type",
+    "status",
+    "length",
+    "width",
+    "draft",
+    "cargo",
+    "transceiver"
+  ],
+  "quality": {
+    "source_rows": 7293408,
+    "area_rows": 105092,
+    "commercial_area_rows": 12506,
+    "area_unknown_type": 8,
+    "identical_duplicates_removed": 0,
+    "conflicting_rows_rejected": 0,
+    "accepted_reports": 12506
+  },
+  "config_sha256": "5573d2042709c5d82d4587e7cf59194ec122514bd379ad0df2bfea8dc0c138e5"
+}
